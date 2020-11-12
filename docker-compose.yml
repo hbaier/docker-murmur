@@ -1,0 +1,26 @@
+version: "3"
+services:
+  murmur:
+    image: hbaier/murmur
+    container_name: murmur
+    environment:
+      MURMUR_HOME: /opt/murmur
+      MURMUR_INI_ALLOWPING: true
+      MURMUR_INI_BANDWIDTH: 72000
+      MURMUR_INI_MESSAGEBURST: 5
+      MURMUR_INI_MESSAGELIMIT: 1
+      MURMUR_INI_SERVERPASSWORD: ""
+      MURMUR_INI_SSLDHPARAMS: @ffdhe2048
+      MURMUR_INI_SSLPASSPHRASE: ""
+      MURMUR_INI_USERS: 100
+      MURMUR_INI_WELCOMETEXT: "<br />Welcome to this server running <b>Murmur</b>.<br />Enjoy your stay!<br />"
+      MURMUR_SUPW: changeme
+    ports:
+      - "64738:64738/tcp"
+      - "64738:64738/udp"
+    volumes:
+      - murmur:/opt/murmur
+    restart: unless-stopped
+volumes:
+  murmur:
+    driver: "local"
